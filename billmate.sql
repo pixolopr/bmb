@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.7.1
+-- version 4.4.3
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 11, 2016 at 10:43 PM
--- Server version: 5.6.20
--- PHP Version: 5.5.15
+-- Host: localhost
+-- Generation Time: Jul 14, 2016 at 11:11 PM
+-- Server version: 5.6.24
+-- PHP Version: 5.6.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -27,9 +27,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `access` (
-`id` int(11) NOT NULL COMMENT 'id',
+  `id` int(11) NOT NULL COMMENT 'id',
   `name` varchar(255) NOT NULL COMMENT 'name'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `access`
@@ -46,12 +46,12 @@ INSERT INTO `access` (`id`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `customer` (
-`id` int(11) NOT NULL COMMENT 'id',
+  `id` int(11) NOT NULL COMMENT 'id',
   `name` varchar(255) NOT NULL COMMENT 'text',
   `contact` varchar(15) NOT NULL COMMENT 'tel',
   `address` varchar(255) NOT NULL COMMENT 'text',
   `company` varchar(255) NOT NULL COMMENT 'text'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -60,12 +60,17 @@ CREATE TABLE IF NOT EXISTS `customer` (
 --
 
 CREATE TABLE IF NOT EXISTS `invoice` (
-`id` int(11) NOT NULL COMMENT 'id',
+  `id` int(11) NOT NULL COMMENT 'id',
   `bill_no` varchar(255) NOT NULL COMMENT 'text',
   `customer_id` int(11) NOT NULL COMMENT 'dropdown customer|name',
   `status_id` int(11) NOT NULL COMMENT 'dropdown status|name',
   `user_id` int(11) NOT NULL COMMENT 'dropdown users|name',
   `date` date NOT NULL COMMENT 'date',
+  `type` varchar(255) NOT NULL COMMENT 'text',
+  `weight` float NOT NULL COMMENT 'number',
+  `unit_amount` float NOT NULL COMMENT 'number',
+  `reciever_contact` varchar(15) NOT NULL COMMENT 'text',
+  `paid` float NOT NULL COMMENT 'number',
   `amount` float NOT NULL COMMENT 'number',
   `service_tax` float NOT NULL COMMENT 'number',
   `swachhbharat_tax` float NOT NULL COMMENT 'number',
@@ -73,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `invoice` (
   `total` float NOT NULL COMMENT 'number',
   `from_place` varchar(255) NOT NULL COMMENT 'text',
   `to_place` varchar(255) NOT NULL COMMENT 'text'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -82,9 +87,9 @@ CREATE TABLE IF NOT EXISTS `invoice` (
 --
 
 CREATE TABLE IF NOT EXISTS `status` (
-`id` int(11) NOT NULL COMMENT 'id',
+  `id` int(11) NOT NULL COMMENT 'id',
   `name` varchar(255) NOT NULL COMMENT 'text'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -93,12 +98,12 @@ CREATE TABLE IF NOT EXISTS `status` (
 --
 
 CREATE TABLE IF NOT EXISTS `tax` (
-`id` int(11) NOT NULL COMMENT 'id',
+  `id` int(11) NOT NULL COMMENT 'id',
   `name` varchar(255) NOT NULL COMMENT 'text',
   `value` float NOT NULL COMMENT 'number',
   `from_date` date DEFAULT NULL COMMENT 'date',
   `to_date` date DEFAULT NULL COMMENT 'date'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tax`
@@ -116,13 +121,13 @@ INSERT INTO `tax` (`id`, `name`, `value`, `from_date`, `to_date`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-`id` int(11) NOT NULL COMMENT 'id',
+  `id` int(11) NOT NULL COMMENT 'id',
   `username` varchar(255) NOT NULL COMMENT 'text',
   `password` varchar(255) NOT NULL COMMENT 'password',
   `name` varchar(255) NOT NULL COMMENT 'text',
   `access` int(11) NOT NULL COMMENT 'dropdown access|name',
   `email` varchar(255) NOT NULL COMMENT 'email'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -141,37 +146,37 @@ INSERT INTO `users` (`id`, `username`, `password`, `name`, `access`, `email`) VA
 -- Indexes for table `access`
 --
 ALTER TABLE `access`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `invoice`
 --
 ALTER TABLE `invoice`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `status`
 --
 ALTER TABLE `status`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tax`
 --
 ALTER TABLE `tax`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -181,32 +186,32 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `access`
 --
 ALTER TABLE `access`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id';
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id';
 --
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id';
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id';
 --
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id';
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id';
 --
 -- AUTO_INCREMENT for table `tax`
 --
 ALTER TABLE `tax`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
