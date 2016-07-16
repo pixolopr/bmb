@@ -16,4 +16,16 @@
  	 	 $message['json']=$this->model->get_all(); 
  	 	 $this->load->view('json', $message); 
  	 } 
+ 	 public function getreports()
+ 	 {
+ 	 	$fromdate = $this->input->get('fromdate');
+ 	 	$todate = $this->input->get('todate');
+ 	 	$customer = $this->input->get('customer');
+ 	 	$status = $this->input->get('status');
+ 	 	if($fromdate == false)
+ 	 		{
+
+ 	 		};
+ 	 	//$message['json'] = $this->model->getreports(fromdate, todate, customer, status);
+ 	 }
  }

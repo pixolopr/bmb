@@ -6,6 +6,9 @@
 	 public $_table = 'invoice';  
  
  	 //Write functions here 
+ 	 /*public function getreports(fromdate,todate,customer,status){
+
+ 	 }*/
  } 
  
  ?>
