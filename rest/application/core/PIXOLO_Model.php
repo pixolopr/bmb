@@ -855,4 +855,11 @@ class PIXOLO_Model extends CI_Model
       $query=$this->db->query("SELECT `COLUMN_NAME`,`COLUMN_COMMENT` from INFORMATION_SCHEMA.COLUMNS WHERE `TABLE_NAME`='$this->_table' AND `TABLE_SCHEMA`='$db'")->result();
       return $query;
     }
+    
+    /*QUERY HELPERS*/
+    public function addcol($t, $c, $n)
+    {
+            return ',`'.$t.'`.`'.$c.'` AS `'.$n.'` ';
+    }
+    
 }

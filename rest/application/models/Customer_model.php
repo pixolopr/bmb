@@ -5,7 +5,17 @@
  { 
 	 public $_table = 'customer';  
  
- 	 //Write functions here 
+ 	 //Write functions here
+ 	 public function checkcustomer($name, $contact, $address, $company){
+ 	 	$query = $this->db->query('SELECT * FROM `customer` WHERE `name` = "'.$name.'" AND `contact` = "'.$contact.'"');
+ 	 	if($query->num_rows() > 0)
+ 	 		{
+ 	 			return false;
+ 	 		}else{
+ 	 			$query = $this->db->query('INSERT INTO `customer` (`name`,`contact`,`address`,`company`) VALUES ("'.$name.'", "'.$contact.'", "'.$address.'", "'.$company.'")');
+ 	 			return $this->db->insert_id();
+ 	 		};
+ 	 }
  } 
  
  ?>

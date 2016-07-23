@@ -20,12 +20,21 @@
  	 {
  	 	$fromdate = $this->input->get('fromdate');
  	 	$todate = $this->input->get('todate');
+		$fromdate = str_replace('/', '-', $fromdate);
+		$fromdate = date('Y-m-d', strtotime($fromdate));
+		$todate = str_replace('/', '-', $todate);
+		$todate = date('Y-m-d', strtotime($todate));
  	 	$customer = $this->input->get('customer');
  	 	$status = $this->input->get('status');
  	 	if($fromdate == false)
  	 		{
 
  	 		};
- 	 	//$message['json'] = $this->model->getreports(fromdate, todate, customer, status);
+ 	 	$message['json'] = $this->model->getreports($fromdate, $todate, $customer, $status);
+ 	 	$this->load->view('json', $message); 
+ 	 }
+ 	 public function getlastbillnumber(){
+ 	 	$message['json'] = $this->model->getlastbillnumber();
+ 	 	$this->load->view('json', $message);
  	 }
  }

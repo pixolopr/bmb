@@ -16,4 +16,13 @@
  	 	 $message['json']=$this->model->get_all(); 
  	 	 $this->load->view('json', $message); 
  	 } 
+ 	 public function checkcustomer()
+ 	 {
+ 	 	$name = $this->input->get('name');
+ 	 	$contact = $this->input->get('contact');
+ 	 	$address = $this->input->get('address');
+ 	 	$company = $this->input->get('company');
+ 	 	$message['json'] = $this->model->checkcustomer($name, $contact, $address, $company);
+ 	 	$this->load->view('json', $message);
+ 	 }
  }
