@@ -7,7 +7,7 @@
  
  	 //Write functions here
  	 public function checkcustomer($name, $contact, $address, $company){
- 	 	$query = $this->db->query('SELECT * FROM `customer` WHERE `name` = "'.$name.'" AND `contact` = "'.$contact.'"');
+ 	 	$query = $this->db->query('SELECT * FROM `customer` WHERE `company` = "'.$company.'" AND `contact` = "'.$contact.'"');
  	 	if($query->num_rows() > 0)
  	 		{
  	 			return false;

@@ -1,21 +1,21 @@
-<?php 
- defined('BASEPATH') OR exit('No direct script access allowed'); 
- 
- header('Access-Control-Allow-Origin: *'); 
- 
- class Invoice extends PIXOLO_Controller { 
- 
- 	 function __construct(){ 
- 	 	 parent::__construct(); 
- 
- 	 	 $this->load->model('Invoice_model', 'model'); 
- 	 } 
+<?php
+ defined('BASEPATH') OR exit('No direct script access allowed');
 
- 	 public function index() 
- 	 { 
- 	 	 $message['json']=$this->model->get_all(); 
- 	 	 $this->load->view('json', $message); 
- 	 } 
+ header('Access-Control-Allow-Origin: *');
+
+ class Invoice extends PIXOLO_Controller {
+
+ 	 function __construct(){
+ 	 	 parent::__construct();
+
+ 	 	 $this->load->model('Invoice_model', 'model');
+ 	 }
+
+ 	 public function index()
+ 	 {
+ 	 	 $message['json']=$this->model->get_all();
+ 	 	 $this->load->view('json', $message);
+ 	 }
  	 public function getreports()
  	 {
  	 	$fromdate = $this->input->get('fromdate');
@@ -25,9 +25,10 @@
 		$todate = str_replace('/', '-', $todate);
 		$todate = date('Y-m-d', strtotime($todate));
  	 	$customer = $this->input->get('customer');
+    $customer_contact = $this->input->get('customer_contact');
  	 	$status = $this->input->get('status');
- 	 	$message['json'] = $this->model->getreports($fromdate, $todate, $customer, $status);
- 	 	$this->load->view('json', $message); 
+ 	 	$message['json'] = $this->model->getreports($fromdate, $todate, $customer, $customer_contact, $status);
+ 	 	$this->load->view('json', $message);
  	 }
  	 public function getdatewisestats()
  	 {
@@ -40,10 +41,21 @@
  	 	$customer = $this->input->get('customer');
  	 	$status = $this->input->get('status');
  	 	$message['json'] = $this->model->getdatewisestats($fromdate, $todate, $customer, $status);
- 	 	$this->load->view('json', $message); 
+ 	 	$this->load->view('json', $message);
  	 }
  	 public function getlastbillnumber(){
  	 	$message['json'] = $this->model->getlastbillnumber();
+ 	 	$this->load->view('json', $message);
+ 	 }
+ 	 public function getinvoice()
+ 	 {
+ 	 	$id = $this->input->get('id');
+ 	 	$message['json'] = $this->model->getinvoice($id);
+ 	 	$this->load->view('json', $message);
+ 	 }
+ 	 public function deleteinvoice(){
+ 	 	$id = $this->input->get('id');
+ 	 	$message['json'] = $this->model->deleteinvoice($id);
  	 	$this->load->view('json', $message);
  	 }
  }
